@@ -1,12 +1,17 @@
 import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { RouterOutlet } from '@angular/router';
-
+import { routes } from './app.routes';
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css'],
+  standalone: true,
+  imports: [RouterModule, RouterOutlet]
 })
 export class AppComponent {
   title = 'Catedra3IDWMFrontend';
+  constructor() {
+    RouterModule.forRoot(routes); 
+  }
 }
