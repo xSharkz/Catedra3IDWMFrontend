@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../../Services/auth.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ToastService } from '../../../Services/toast.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-register',
   imports: [ReactiveFormsModule],
@@ -10,8 +12,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 })
 export class RegisterComponent {
   registerForm;
-
-  constructor(private fb: FormBuilder, private authService: AuthService) {
+  errorMessage: string = '';
+  constructor(private fb: FormBuilder, private authService: AuthService, private toastService: ToastService, private router: Router) {
     this.registerForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
@@ -20,7 +22,19 @@ export class RegisterComponent {
 
   onSubmit() {
     if (this.registerForm.valid) {
-      this.authService.register(this.registerForm.value).subscribe();
+      const { email, password } = this.registerForm.value;
+      this.authService.register({ email, password }).subscribe(
+        () => {
+          this.toastService.show('¡Registro exitoso! Por favor, inicia sesión.');
+          this.registerForm.reset();
+          this.router.navigate(['/login']);
+        },
+        (error) => {
+          this.errorMessage = error.error.message || 'Error desconocido al registrar';
+          this.toastService.show(error.error.message);
+          this.registerForm.patchValue({ password: ''});
+        }
+      );
     }
   }
 }

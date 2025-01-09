@@ -1,5 +1,20 @@
-<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-    <input formControlName="email" type="email" placeholder="Correo electrónico" required />
-    <input formControlName="password" type="password" placeholder="Contraseña" required />
-    <button type="submit" [disabled]="registerForm.invalid">Registrarse</button>
-</form>
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="max-w-lg mx-auto p-6 bg-white shadow-md rounded-lg space-y-4">
+    <h2 class="text-2xl font-semibold text-center text-gray-900">Crear Cuenta</h2>
+  
+    <div>
+      <label for="email" class="block text-sm font-medium text-gray-700">Correo Electrónico</label>
+      <input id="email" formControlName="email" type="email" placeholder="Correo electrónico" required 
+        class="mt-2 p-3 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+    </div>
+  
+    <div>
+      <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
+      <input id="password" formControlName="password" type="password" placeholder="Contraseña" required
+        class="mt-2 p-3 w-full border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+    </div>
+  
+    <button type="submit" [disabled]="registerForm.invalid" 
+      class="w-full mt-4 py-3 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 disabled:bg-gray-400 transition-all">
+      Registrarse
+    </button>
+  </form>
