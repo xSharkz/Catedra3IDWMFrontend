@@ -1,10 +1,16 @@
-<div>
-  <h1>Mi App</h1>
-  <nav>
-    <a routerLink="/register">Registro</a>
-    <a routerLink="/login">Iniciar Sesión</a>
-    <a routerLink="/posts">Ver Posts</a>
-    <a routerLink="/create-post">Crear Post</a>
-  </nav>
+<div *ngIf="toastMessage" class="toast">
+  {{ toastMessage }}
+</div>
+<div class="bg-blue-600 text-white p-4 shadow-md mb-20">
+  <div class="container mx-auto flex justify-between items-center">
+    <h1 class="text-3xl font-bold">Cátedra 3</h1>
+    
+    <nav class="space-x-6">
+      <a routerLink="/register" class="text-white hover:text-blue-200">Registro</a>
+      <a routerLink="/login" class="text-white hover:text-blue-200">Iniciar Sesión</a>
+      <a routerLink="/posts" class="text-white hover:text-blue-200">Ver Posts</a>
+      <a routerLink="/create-post" class="text-white hover:text-blue-200">Crear Post</a>
+    </nav>
+  </div>
 </div>
 <router-outlet></router-outlet>
