@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, tap, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +25,11 @@ export class AuthService {
   }
 
   register(user: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/register`, user);
+    return this.http.post(`${this.apiUrl}/register`, user).pipe(
+      catchError((error) => {
+        return throwError(() => error);
+      })
+    );
   }
 
   getToken(): string | null {
@@ -34,5 +38,25 @@ export class AuthService {
 
   isAuthenticated(): boolean {
     return this.tokenSubject.value !== null;
+  }
+
+  isTokenValid(): boolean {
+    const token = this.getToken();
+    if (!token) {
+      return false;
+    }
+
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      const now = Math.floor(Date.now() / 1000);
+      return payload.exp > now; 
+    } catch (error) {
+      return false; 
+    }
+  }
+
+  logout(): void {
+    localStorage.clear();
+    this.tokenSubject.next(null);
   }
 }
