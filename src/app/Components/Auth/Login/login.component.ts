@@ -4,6 +4,7 @@ import { AuthService } from '../../../Services/auth.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { ToastService } from '../../../Services/toast.service';
 @Component({
   selector: 'app-login',
   imports: [ReactiveFormsModule, CommonModule],
@@ -13,7 +14,7 @@ import { CommonModule } from '@angular/common';
 export class LoginComponent {
   loginForm;
   loginSuccess = false;
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private toastService: ToastService) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6), Validators.pattern(/(?=.*\d)/)]]
@@ -23,14 +24,12 @@ export class LoginComponent {
   onSubmit() {
     if (this.loginForm.valid) {
       this.authService.login(this.loginForm.value).subscribe(
-        (response) => {
-          this.loginSuccess = true;
-          setTimeout(() => {
-            this.router.navigate(['/login']); 
-          }, 2000);
+        () => {
+          this.toastService.show('¡Inicio de sesión exitoso!');
+          this.router.navigate(['/posts']);
         },
-        (error) => {
-          console.log('Error en el login', error);
+        () => {
+          this.toastService.show('Credenciales inválidas.');
         }
       );
     }
