@@ -1,59 +1,76 @@
 # Catedra3IDWMFrontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.6.
+Este es el repositorio del **Frontend** para el proyecto **Cátedra 3: Introducción al Desarrollo Web/Móvil**. Este proyecto se desarrolla como parte de un curso sobre desarrollo de aplicaciones web, utilizando tecnologías modernas como **Angular**, **Tailwind CSS** y **Flowbite**.
 
-## Development server
+## Descripción
 
-To start a local development server, run:
+Este frontend interactúa con un backend API ASP.NET Core y permite realizar las siguientes acciones:
 
-```bash
-ng serve
-```
+- Registro de nuevos usuarios.
+- Autenticación de usuarios (login).
+- Visualización de publicaciones en formato de tarjetas (cards).
+- Creación de nuevas publicaciones.
+- Manejo de rutas protegidas con verificación de JWT (token).
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Tecnologías
 
-## Code scaffolding
+- **Angular**: Framework principal para la construcción de la SPA (Single Page Application).
+- **Tailwind CSS**: Utilizado para el diseño responsivo y estilo de la interfaz de usuario.
+- **Flowbite**: Biblioteca de componentes de UI basada en Tailwind CSS.
+- **JWT**: Token de autenticación para manejar sesiones de usuarios.
+- **RxJS**: Biblioteca para manejo de operaciones asíncronas.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Requisitos
 
-```bash
-ng generate component component-name
-```
+Para ejecutar este proyecto, necesitas tener instalados los siguientes programas:
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+- **Node.js** y **npm** (Node Package Manager)
+- **Angular CLI**: Utilizado para generar y servir el proyecto Angular.
 
-```bash
-ng generate --help
-```
+## Instalación
 
-## Building
+Sigue estos pasos para instalar el proyecto en tu máquina local:
 
-To build the project run:
+1. Clona el repositorio:
 
-```bash
-ng build
-```
+   ```bash
+   git clone https://github.com/xSharkz/Catedra3IDWMFrontend.git
+   ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+2. Entra al directorio del proyecto:
 
-## Running unit tests
+   ```bash
+   cd Catedra3IDWMFrontend
+   ```
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+3. Instala las dependencias del proyecto utilizando npm:
 
-```bash
-ng test
-```
+   ```bash
+   npm install
+   ```
 
-## Running end-to-end tests
+## Uso
 
-For end-to-end (e2e) testing, run:
+1. Inicia el servidor de desarrollo:
 
-```bash
-ng e2e
-```
+   ```bash
+   ng serve
+   ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+   Esto iniciará la aplicación en `http://localhost:4200/`.
 
-## Additional Resources
+2. Abre tu navegador y ve a `http://localhost:4200/` para ver la aplicación en acción.
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Rutas Principales
+
+- **/register**: Ruta para el registro de nuevos usuarios.
+- **/login**: Ruta para que los usuarios inicien sesión.
+- **/posts**: Muestra una lista de publicaciones.
+- **/create-post**: Ruta para crear nuevas publicaciones.
+
+## Características
+
+- **Formulario de registro y login**: Permite a los usuarios registrarse y acceder a su cuenta.
+- **Visualización de publicaciones**: Muestra publicaciones en formato de tarjeta con título, imagen y fecha.
+- **Autenticación con JWT**: Verifica el token de autenticación al recargar la página o acceder a rutas protegidas.
+- **Formulario de creación de publicaciones**: Permite crear nuevas publicaciones con un título y una imagen.
